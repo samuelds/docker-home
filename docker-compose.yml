@@ -1,0 +1,15 @@
+version: "3"
+services:
+    duplicati:
+        image: linuxserver/duplicati
+        container_name: duplicati
+        environment:
+            - PUID=1000
+            - PGID=1000
+            - TZ=Europe/London
+        volumes:
+            - ./data/duplicati/appdata/config:/config
+            - ./data/duplicati/backup:/backup
+        ports:
+            - 8200:8200
+        restart: unless-stopped
