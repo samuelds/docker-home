@@ -1,6 +1,15 @@
 version: "3"
 services:
 
+    cloudflare:
+        image: cloudflare/cloudflared:latest
+        container_name: cloudflare
+        restart: unless-stopped
+        environment:
+            - "tunnel --no-autoupdate run --token ${CLOUDFLARE_TOKEN}"
+        networks:
+            - proxy
+
     nginx-proxy:
         image: jwilder/nginx-proxy
         container_name: nginx-proxy
@@ -14,26 +23,26 @@ services:
         dns:
             - 127.0.0.1
         networks:
-            - proxy-tier
+            - proxy
 
     duplicati:
         image: linuxserver/duplicati
         container_name: duplicati
+        restart: unless-stopped
         environment:
-            - PUID=1000
-            - PGID=1000
-            - TZ=Europe/Paris
-            - VIRTUAL_HOST=duplicati.home.local
-            - VIRTUAL_PORT=8200
+            - "PUID=1000"
+            - "PGID=1000"
+            - "TZ=Europe/Paris"
+            - "VIRTUAL_HOST=duplicati.home.local"
+            - "VIRTUAL_PORT=8200"
 #            - LETSENCRYPT_HOST=duplicati.home.local
         volumes:
             - ./data/duplicati/appdata/config:/config
             - ./data:/files
         ports:
             - "8200:8200"
-        restart: unless-stopped
         networks:
-            - proxy-tier
+            - proxy
 
 networks:
-    proxy-tier:
+    proxy:
