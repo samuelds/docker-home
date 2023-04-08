@@ -1,6 +1,19 @@
 version: "3"
 services:
 
+    nginx-proxy:
+        image: jwilder/nginx-proxy
+        container_name: nginx-proxy
+        ports:
+            - "80:80"
+            - "443:443"
+        #        volumes:
+        #            - /var/run/docker.sock:/tmp/docker.sock:ro
+        #            - ./data/nginx-proxy/certs:/etc/nginx/certs:ro
+        #            - ./data/nginx-proxy/vhost.d:/etc/nginx/vhost.d
+        #            - ./data/nginx-proxy/html:/usr/share/nginx/html
+        restart: unless-stopped
+
     duplicati:
         image: linuxserver/duplicati
         container_name: duplicati
@@ -12,18 +25,5 @@ services:
             - ./data/duplicati/appdata/config:/config
             - ./data:/files
         ports:
-            - 8200:8200
-        restart: unless-stopped
-
-    nginx-proxy:
-        image: jwilder/nginx-proxy
-        container_name: nginx-proxy
-        ports:
-            - "80:80"
-            - "443:443"
-#        volumes:
-#            - /var/run/docker.sock:/tmp/docker.sock:ro
-#            - ./data/nginx-proxy/certs:/etc/nginx/certs:ro
-#            - ./data/nginx-proxy/vhost.d:/etc/nginx/vhost.d
-#            - ./data/nginx-proxy/html:/usr/share/nginx/html
+            - "8200:8200"
         restart: unless-stopped
