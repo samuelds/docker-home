@@ -34,4 +34,3 @@ services:
 
 networks:
     proxy-tier:
-        external: true
