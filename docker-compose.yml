@@ -7,13 +7,11 @@ services:
         ports:
             - "80:80"
             - "443:443"
-            - "8042:8080"
         volumes:
             - /var/run/docker.sock:/tmp/docker.sock:ro
-        #            - ./data/nginx-proxy/certs:/etc/nginx/certs:ro
-        #            - ./data/nginx-proxy/vhost.d:/etc/nginx/vhost.d
-        #            - ./data/nginx-proxy/html:/usr/share/nginx/html
         restart: unless-stopped
+        networks:
+            - proxy-tier
 
     duplicati:
         image: linuxserver/duplicati
@@ -22,9 +20,18 @@ services:
             - PUID=1000
             - PGID=1000
             - TZ=Europe/Paris
+            - VIRTUAL_HOST=duplicati.home.local
+            - VIRTUAL_PORT=8200
+#            - LETSENCRYPT_HOST=duplicati.home.local
         volumes:
             - ./data/duplicati/appdata/config:/config
             - ./data:/files
         ports:
             - "8200:8200"
         restart: unless-stopped
+        networks:
+            - proxy-tier
+
+networks:
+    proxy-tier:
+        external: true
