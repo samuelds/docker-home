@@ -9,7 +9,7 @@ services:
             - TZ=Europe/London
         volumes:
             - ./data/duplicati/appdata/config:/config
-            - ./data/duplicati/backup:/backup
+            - ./data:/files
         ports:
             - 8200:8200
         restart: unless-stopped
