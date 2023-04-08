@@ -7,8 +7,8 @@ services:
         ports:
             - "80:80"
             - "443:443"
-        #        volumes:
-        #            - /var/run/docker.sock:/tmp/docker.sock:ro
+        volumes:
+            - /var/run/docker.sock:/tmp/docker.sock:ro
         #            - ./data/nginx-proxy/certs:/etc/nginx/certs:ro
         #            - ./data/nginx-proxy/vhost.d:/etc/nginx/vhost.d
         #            - ./data/nginx-proxy/html:/usr/share/nginx/html
