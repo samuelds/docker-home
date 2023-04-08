@@ -4,12 +4,15 @@ services:
     nginx-proxy:
         image: jwilder/nginx-proxy
         container_name: nginx-proxy
+        restart: unless-stopped
         ports:
             - "80:80"
             - "443:443"
         volumes:
             - /var/run/docker.sock:/tmp/docker.sock:ro
-        restart: unless-stopped
+            - ./files/nginx-proxy/conf.d/local.conf:/etc/nginx/conf.d/local.conf
+        dns:
+            - 127.0.0.1
         networks:
             - proxy-tier
 
