@@ -8,6 +8,7 @@ services:
         environment:
             - "AVAHI_DAEMON_DETECT_LOCAL=0"
             - "AVAHI_DAEMON_HOSTNAME=home.local"
+            - "AVAHI_DAEMON_NAME=local.home"
         volumes:
             -   /var/run/dbus:/var/run/dbus
         networks:
