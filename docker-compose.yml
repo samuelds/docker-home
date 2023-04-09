@@ -1,6 +1,13 @@
 version: "2"
 services:
 
+    avahi-daemon:
+        image: tukiyo3/avahi-daemon:latest
+        network_mode: host
+        restart: always
+        networks:
+            - proxy
+
     cloudflare:
         image: cloudflare/cloudflared:latest
         container_name: cloudflare
@@ -51,7 +58,7 @@ services:
             - "PUID=1000"
             - "PGID=1000"
             - "TZ=Europe/Paris"
-            - "VIRTUAL_HOST=duplicati.home.sds.ovh"
+            - "VIRTUAL_HOST=duplicati.home.sds.ovh duplicati.local"
             - "VIRTUAL_PORT=8200"
             - "LETSENCRYPT_HOST=duplicati.home.sds.ovh"
         volumes:
