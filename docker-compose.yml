@@ -3,7 +3,7 @@ services:
 
     avahi-daemon:
         image: ianblenke/avahi:latest
-        network_mode: host
+        container_name: avahi
         restart: always
         environment:
             - "AVAHI_DAEMON_DETECT_LOCAL=0"
@@ -20,7 +20,7 @@ services:
 
     nginx-proxy:
         image: jwilder/nginx-proxy
-        container_name: nginx-proxy
+        container_name: nginx
         restart: unless-stopped
         ports:
             - "80:80"
@@ -38,7 +38,7 @@ services:
 
     nginx-proxy-acme:
         image: nginxproxy/acme-companion
-        container_name: nginx-proxy-acme
+        container_name: acme
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock:ro
             - ./data/nginx-proxy/vhost.d:/etc/nginx/vhost.d
