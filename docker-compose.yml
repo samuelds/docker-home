@@ -54,6 +54,8 @@ services:
         image: linuxserver/duplicati
         container_name: duplicati
         restart: unless-stopped
+        labels:
+            - "VIRTUAL_HOST=duplicati.home.sds.ovh duplicati.local"
         environment:
             - "PUID=1000"
             - "PGID=1000"
