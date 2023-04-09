@@ -19,6 +19,7 @@ services:
         volumes:
             - /var/run/docker.sock:/tmp/docker.sock:ro
             - ./files/nginx-proxy/conf.d/local.conf:/etc/nginx/conf.d/local.conf
+            - ./data/nginx-proxy/vhost.d:/etc/nginx/vhost.d
             - ./data/nginx-proxy/certs:/etc/nginx/certs
         dns:
             - 127.0.0.1
@@ -30,6 +31,7 @@ services:
         container_name: nginx-proxy-acme
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock:ro
+            - ./data/nginx-proxy/vhost.d:/etc/nginx/vhost.d
             - ./data/nginx-proxy/certs:/etc/nginx/certs
             - ./data/nginx-proxy/acme:/etc/acme.sh
         environment:
