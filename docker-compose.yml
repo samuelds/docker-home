@@ -47,6 +47,7 @@ services:
             - ./data/nginx-proxy/acme:/etc/acme.sh
         environment:
             - "DEFAULT_EMAIL=${DEFAULT_EMAIL}"
+            - "NGINX_PROXY_CONTAINER=nginx"
         networks:
             - proxy
 
