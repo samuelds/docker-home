@@ -5,6 +5,7 @@ services:
         image: ianblenke/avahi:latest
         container_name: avahi
         restart: always
+        network_mode: host
         environment:
             - "AVAHI_DAEMON_DETECT_LOCAL=0"
             - "AVAHI_DAEMON_HOSTNAME=home.local"
