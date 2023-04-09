@@ -19,6 +19,7 @@ services:
         volumes:
             - /var/run/docker.sock:/tmp/docker.sock:ro
             - ./files/nginx-proxy/conf.d/local.conf:/etc/nginx/conf.d/local.conf
+            - ./files/nginx-proxy/certs:/etc/nginx/certs
         dns:
             - 127.0.0.1
         networks:
@@ -32,9 +33,9 @@ services:
             - "PUID=1000"
             - "PGID=1000"
             - "TZ=Europe/Paris"
-            - "VIRTUAL_HOST=duplicati.home.local"
+            - "VIRTUAL_HOST=duplicati.home.sds.ovh"
             - "VIRTUAL_PORT=8200"
-#            - LETSENCRYPT_HOST=duplicati.home.local
+            - "LETSENCRYPT_HOST=duplicati.home.sds.ovh"
         volumes:
             - ./data/duplicati/appdata/config:/config
             - ./data:/files
