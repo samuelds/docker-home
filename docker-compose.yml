@@ -2,9 +2,11 @@ version: "2"
 services:
 
     avahi-daemon:
-        image: tukiyo3/avahi-daemon:latest
+        image: ianblenke/avahi:latest
         network_mode: host
         restart: always
+        environment:
+            - "AVAHI_DAEMON_DETECT_LOCAL=0"
         networks:
             - proxy
 
