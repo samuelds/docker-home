@@ -1,4 +1,4 @@
-version: "2"
+version: "3"
 services:
 
     avahi-daemon:
@@ -47,8 +47,6 @@ services:
             - ./data/nginx-proxy/acme:/etc/acme.sh
         environment:
             - "DEFAULT_EMAIL=${DEFAULT_EMAIL}"
-        volumes_from:
-            - nginx-proxy
         networks:
             - proxy
 
